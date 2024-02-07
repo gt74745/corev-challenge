@@ -1,0 +1,30 @@
+/*========================*/
+/*    Coding Challenge    */
+/*========================*/
+
+The counter module is contained in counter.sv. clk and rst are the clock and reset signals respectively. At the rising edge of clk OR the rising edge of rst, the counter is updated according to the following truth table (for the counter 'out', [+] indicates an increment, [-] indicates a decrement, [=] indicates no change, and [0] indicates a reset to 0):
+
+-------------------------------------
+|  rst  |  enable  |  sel  ||  out  |
+-------------------------------------
+|   0   |    0     |   0   ||   =   |
+|   0   |    0     |   1   ||   =   |
+|   0   |    1     |   0   ||   +   |
+|   0   |    1     |   1   ||   -   |
+|   1   |    0     |   0   ||   0   |
+|   1   |    0     |   1   ||   0   |
+|   1   |    1     |   0   ||   0   |
+|   1   |    1     |   1   ||   0   |
+-------------------------------------
+
+The top module top.sv contains 1 instance of the counter module, as well as signals fed into the counter with arbitrary assignments throughout its operation.
+
+A single 'make' command will verilate, build, and run the simulation. The waveform is dumped into sim/wave.vcd. By default, the waveform should be identical to the one shown in test.png
+
+/*=========================*/
+/*    Project Paragraph    */
+/*=========================*/
+
+Thank you for considering me for the CORE-V Wally Mentorship.
+
+By far the most interesting project I have completed was one I undertook very recently. Over the past several years I have taught myself the basics of CPU design, using RISC-V as my choice vessel for testing my knowledge. Eventually I decided that my next step would be to add the standard extensions (RV32IMAFD) to one of my simpler designs. I did not, however, feel comfortable diving straight into implementing those operations in hardware, so I decided to microcode them in RISC-V assembly. The process of writing the microcoded operations and setting up the infrastructure for the core to execute them invisibly was incredibly exciting and rewarding. It taught me a lot about writing effective and discreet firmware, and about using verification techniques to ensure that my code was effective. My biggest struggle throughout the process was figuring out a way to ensure that microcoded operations would run on the correct registers as specified by the programmer. This was challenging since there is no way to directly address a register using a value from another register. I used a small block of memory to solve this problem, first storing all of the registers to a stack and then accessing their values from the stack according to the decoded instruction.
